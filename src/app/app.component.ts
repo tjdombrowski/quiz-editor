@@ -87,6 +87,7 @@ export class AppComponent implements OnInit {
 
   setSelectedQuiz(q: QuizDisplay) {
     this.selectedQuiz = q;
+    this.detailsAnimationState = 'finalPosition';
   }
 
   get titleColor() {
@@ -112,7 +113,7 @@ export class AppComponent implements OnInit {
     };
 
     this.quizzes = [...this.quizzes, newQuiz];
-    this.selectedQuiz = newQuiz;
+    this.setSelectedQuiz(newQuiz);
   }
 
   removeQuestion(questionToDelete) {
@@ -143,6 +144,24 @@ export class AppComponent implements OnInit {
 
   get numberOfAddedQuizzes() {
     return this.quizzes.filter(x => x.originalName === 'New Untitled Quiz').length;
+  }
+
+  /**
+   * Animation stuff
+   * 
+   * Keru - pink/white      arts : music, piano, singing, drawing, painting
+   *  + wand - silver       piano, violin, paint brush, pencil, pen
+   *  + snake - white       Glimmer
+   * Lee - blue/black/teal  sports : martial arts (staff, hand-to-hand), dancing, acrobatics
+   *  + 
+   *  + cat - grey?         Besque
+   * Ajiri - yellow/green   
+   * 
+   */
+  detailsAnimationState = "leftPosition";
+
+  detailsFromLeftAnimationComplete() {
+    this.detailsAnimationState = 'leftPosition';
   }
 
   jsPromisesOne() {
