@@ -32,8 +32,13 @@
     <div class="col-md-8" [@detailsFromLeft]="detailsAnimationState" (@detailsFromLeft.done)="detailsFromLeftAnimationComplete()" >
       <div *ngIf="selectedQuiz">
         <br>
+        <div [@pulseSaveCancelButtons]="numberOfAddedQuizzes + numberOfDeletedQuizzes + numberOfEditedQuizzes > 0 ? 'somethingToSave' : 'nothingToSave'">
+
+        </div>
         <button 
-          class="btn btn-outline-dark">
+          class="btn"
+          [class.btn-outline-dark]="numberOfAddedQuizzes + numberOfDeletedQuizzes + numberOfEditedQuizzes === 0"
+          [class.btn-dark]="numberOfAddedQuizzes + numberOfDeletedQuizzes + numberOfEditedQuizzes > 0">
           Save Quizzes
           <span 
             *ngIf="numberOfAddedQuizzes > 0"
