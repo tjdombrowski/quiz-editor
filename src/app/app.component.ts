@@ -74,6 +74,22 @@ export class AppComponent implements OnInit {
     this.setSelectedQuiz(undefined);
   }
 
+  saveBatchEdits() {
+    const editedQuizzes = this.getEditedQuizzes()
+      .map(x =>
+      ({
+        name: x.name,
+        originalName: x.originalName
+        , question: x.questions
+      }));
+    const addedQuizzes = [];
+
+    this.quizSvc.saveQuizzes(editedQuizzes, addedQuizzes).subscribe(
+      numberOfEditedQuizzesSaved => console.log(numberOfEditedQuizzesSaved)
+      , error => console.log(error)
+    );
+  }
+
   private loadAllQuizzes() {
     this.quizSvc.getQuizzes().subscribe((data) => {
       console.log(data);
@@ -139,14 +155,19 @@ export class AppComponent implements OnInit {
     return this.quizzes.filter(x => x.markedForDelete).length;
   }
 
-  get numberOfEditedQuizzes() {
+  getEditedQuizzes() {
     return this.quizzes
     .filter(x => 
       (!x.markedForDelete && x.originalName !== 'New Untitled Quiz') &&
       (x.name != x.originalName
       || x.originalQuestionsChecksum != x.questions.map(x => x.name).join('~'))
-    ).length;
+    );
   }
+
+  get numberOfEditedQuizzes() {
+    return this.getEditedQuizzes().length;
+  }
+
 
   get numberOfAddedQuizzes() {
     return this.quizzes.filter(x => 
