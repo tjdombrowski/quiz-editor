@@ -29,37 +29,43 @@
         </a>
       </div>
     </div>
-    <div class="col-md-8" [@detailsFromLeft]="detailsAnimationState" (@detailsFromLeft.done)="detailsFromLeftAnimationComplete()" >
+    <div 
+      class="col-md-8"
+      [@detailsFromLeft]="detailsAnimationState"
+      (@detailsFromLeft.done)="detailsFromLeftAnimationComplete()"
+    >
       <div *ngIf="selectedQuiz">
         <br>
-        <div [@pulseSaveCancelButtons]="numberOfAddedQuizzes + numberOfDeletedQuizzes + numberOfEditedQuizzes > 0 ? 'somethingToSave' : 'nothingToSave'">
-
+        <div
+          [@pulseSaveCancelButtons]="numberOfAddedQuizzes + numberOfDeletedQuizzes + numberOfEditedQuizzes > 0 ? 'somethingToSave' :'nothingToSave'"
+        >
+          <button 
+            class="btn"
+            [class.btn-outline-dark]="numberOfAddedQuizzes + numberOfDeletedQuizzes + numberOfEditedQuizzes === 0"
+            [class.btn-dark]="numberOfAddedQuizzes + numberOfDeletedQuizzes + numberOfEditedQuizzes > 0"
+          >
+            Save Quizzes
+            <span 
+              *ngIf="numberOfAddedQuizzes > 0"
+              class="badge badge-success ml-2"
+            >
+            + {{ numberOfAddedQuizzes}}
+            </span>
+            <span 
+              *ngIf="numberOfDeletedQuizzes > 0"
+              class="badge badge-danger ml-2"
+            >
+            - {{ numberOfDeletedQuizzes}}
+            </span>          
+            <span 
+              *ngIf="numberOfEditedQuizzes > 0"
+              class="badge badge-light ml-2"
+            >
+            * {{ numberOfEditedQuizzes}}
+            </span>
+          </button>
+          <button class="btn btn-link">Cancel</button>
         </div>
-        <button 
-          class="btn"
-          [class.btn-outline-dark]="numberOfAddedQuizzes + numberOfDeletedQuizzes + numberOfEditedQuizzes === 0"
-          [class.btn-dark]="numberOfAddedQuizzes + numberOfDeletedQuizzes + numberOfEditedQuizzes > 0">
-          Save Quizzes
-          <span 
-            *ngIf="numberOfAddedQuizzes > 0"
-            class="badge badge-success ml-2"
-          >
-          + {{ numberOfAddedQuizzes}}
-          </span>
-          <span 
-            *ngIf="numberOfDeletedQuizzes > 0"
-            class="badge badge-danger ml-2"
-          >
-          - {{ numberOfDeletedQuizzes}}
-          </span>          
-          <span 
-            *ngIf="numberOfEditedQuizzes > 0"
-            class="badge badge-light ml-2"
-          >
-          * {{ numberOfEditedQuizzes}}
-          </span>
-        </button>
-        <button class="btn btn-link">Cancel</button>
         <br>
         <br>
         <div class="card">

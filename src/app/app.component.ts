@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from './quiz.service';
 import {
-  trigger,
-  transition,
-  animate,
-  keyframes,
-  style
- } from '@angular/animations';
+  trigger
+  , transition
+  , animate
+  , keyframes
+  , style
+} from '@angular/animations';
 
 interface QuizDisplay {
   name: string;
@@ -29,7 +29,7 @@ interface QuestionDisplay {
   animations: [
     trigger('detailsFromLeft', [
       transition('leftPosition => finalPosition', [
-        animate('300ms', keyframes([
+        animate('250ms', keyframes([
           style({ left: '-30px', offset: 0.0 }),
           style({ left: '-20px', offset: 0.25 }),
           style({ left: '-10px', offset: 0.5 }),
@@ -47,7 +47,7 @@ interface QuestionDisplay {
         ]))
       ])
     ])
-  ]
+  ]  
 })
 export class AppComponent implements OnInit {
 
@@ -146,11 +146,9 @@ export class AppComponent implements OnInit {
     return this.quizzes.filter(x => x.originalName === 'New Untitled Quiz').length;
   }
 
-
   //
-  // Animations
+  //  Animation properties and methods...
   //
-
   detailsAnimationState = "leftPosition";
 
   detailsFromLeftAnimationComplete() {
@@ -159,7 +157,7 @@ export class AppComponent implements OnInit {
 
 
   //
-  // Promises
+  // Learning promises...
   //
 
   jsPromisesOne() {
