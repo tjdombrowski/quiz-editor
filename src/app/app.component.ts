@@ -82,7 +82,15 @@ export class AppComponent implements OnInit {
         originalName: x.originalName
         , question: x.questions
       }));
-    const addedQuizzes = [];
+
+    const addedQuizzes = this.getAddedQuizzes()
+      .map(x =>
+        ({
+          quizName: x.name,
+          quizQuestions: x.questions.map(x => x.name)
+        }));
+
+        console.log(addedQuizzes);
 
     this.quizSvc.saveQuizzes(editedQuizzes, addedQuizzes).subscribe(
       numberOfEditedQuizzesSaved => console.log(numberOfEditedQuizzesSaved)
@@ -168,11 +176,14 @@ export class AppComponent implements OnInit {
     return this.getEditedQuizzes().length;
   }
 
-
-  get numberOfAddedQuizzes() {
+  getAddedQuizzes() {
     return this.quizzes.filter(x => 
       !x.markedForDelete && 
-      x.originalName === 'New Untitled Quiz').length;
+      x.originalName === 'New Untitled Quiz');
+  }
+
+  get numberOfAddedQuizzes() {
+    return this.getAddedQuizzes().length;
   }
 
   //
